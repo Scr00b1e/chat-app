@@ -1,9 +1,12 @@
+'use client'
+
+import { ChatIcon } from '@chakra-ui/icons'
 import React from 'react'
 
 const Login = () => {
     return (
         <div>
-            Login
+            <ChatIcon />
         </div>
     )
 }
