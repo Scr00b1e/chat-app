@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <ChakraProvider>
       {/* <Login /> */}
-      <Sidebar />
+      {/* <Sidebar /> */}
     </ChakraProvider>
   )
 }

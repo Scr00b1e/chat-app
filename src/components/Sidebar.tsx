@@ -14,7 +14,7 @@ const Sidebar = () => {
     }
 
     return (
-        <Flex w={'300px'} h='100vh'
+        <Flex w={'300px'}
             borderEnd={'1px solid'} borderColor='gray.200' direction={'column'}>
 
             <Flex w='100%' h='80px' align={'center'} justifyContent='space-between'
@@ -28,23 +28,7 @@ const Sidebar = () => {
 
             <Button marginBottom={5}>New Chat</Button>
 
-            <Flex overflowX={'hidden'} overflowY={'scroll'} direction='column' sx={{ scrollbarWidth: "none" }}>
-                <Chat />
-                <Chat />
-                <Chat />
-                <Chat />
-                <Chat />
-                <Chat />
-                <Chat />
-                <Chat />
-                <Chat />
-                <Chat />
-                <Chat />
-
-                <Chat />
-                <Chat />
-                <Chat />
-                <Chat />
+            <Flex overflowY={'scroll'} direction='column' sx={{ scrollbarWidth: "none" }} flex={1}>
                 <Chat />
             </Flex>
 
