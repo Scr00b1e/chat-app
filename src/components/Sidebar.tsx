@@ -1,12 +1,18 @@
+'use client'
+
 import { ArrowLeftIcon } from '@chakra-ui/icons'
 import { Avatar, Button, IconButton } from '@chakra-ui/react'
 import { Text, Flex } from '@chakra-ui/layout'
 import React from 'react'
+import { useRouter } from 'next/navigation'
 
 const Sidebar = () => {
+    const router = useRouter()
+
     const Chat = () => {
         return (
-            <Flex p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}>
+            <Flex p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
+                onClick={() => router.push(`/chat/1`)}>
                 <Avatar marginEnd={3} />
                 <Text>SomeFella@gmail.com</Text>
             </Flex>

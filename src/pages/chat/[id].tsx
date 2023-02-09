@@ -23,8 +23,8 @@ const BottomBar = () => {
 const ChatId = () => {
     return (
         <ChakraProvider>
+            {/* <Sidebar /> */}
             <Flex h={'100vh'}>
-                <Sidebar />
                 <Flex bg={'blue.100'} flex={1} direction='column'>
                     <TopBar />
                     <Flex flex={1} direction='column' pt={4} mx={5}>
