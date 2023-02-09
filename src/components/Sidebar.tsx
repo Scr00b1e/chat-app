@@ -5,9 +5,16 @@ import { Avatar, Button, IconButton } from '@chakra-ui/react'
 import { Text, Flex } from '@chakra-ui/layout'
 import React from 'react'
 import { useRouter } from 'next/navigation'
+import { signOut } from 'firebase/auth'
+import { auth } from 'firebaseconfig'
 
 const Sidebar = () => {
     const router = useRouter()
+
+    const onSignOut = () => {
+        alert('are u sure?')
+        signOut(auth)
+    }
 
     const Chat = () => {
         return (
@@ -29,7 +36,7 @@ const Sidebar = () => {
                     <Avatar marginEnd={3} />
                     <Text>Sup</Text>
                 </Flex>
-                <IconButton size={'sm'} isRound icon={<ArrowLeftIcon />} aria-label={''} />
+                <IconButton size={'sm'} isRound icon={<ArrowLeftIcon />} aria-label={''} onClick={onSignOut} />
             </Flex>
 
             <Button marginBottom={5}>New Chat</Button>
