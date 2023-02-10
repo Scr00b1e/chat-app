@@ -6,10 +6,16 @@ import { Text, Flex } from '@chakra-ui/layout'
 import React from 'react'
 import { useRouter } from 'next/navigation'
 import { signOut } from 'firebase/auth'
-import { auth } from 'firebaseconfig'
+import { auth, db } from 'firebaseconfig'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { useCollection } from 'react-firebase-hooks/firestore'
+import { collection } from 'firebase/firestore'
 
 const Sidebar = () => {
     const router = useRouter()
+    const [user] = useAuthState(auth);
+    const [snapshot, loading, error] = useCollection(collection(db, 'chats'))
+    const chats = snapshot?.docs.map((obj) => ({ id: obj.id, ...obj.data() }))
 
     const onSignOut = () => {
         alert('are u sure?')
@@ -33,8 +39,8 @@ const Sidebar = () => {
             <Flex w='100%' h='80px' align={'center'} justifyContent='space-between'
                 p={3} borderBottom='1px solid' borderColor='gray.200'>
                 <Flex align={'center'}>
-                    <Avatar marginEnd={3} />
-                    <Text>Sup</Text>
+                    <Avatar marginEnd={3} src={user?.photoURL} />
+                    <Text>{user?.displayName}</Text>
                 </Flex>
                 <IconButton size={'sm'} isRound icon={<ArrowLeftIcon />} aria-label={''} onClick={onSignOut} />
             </Flex>
