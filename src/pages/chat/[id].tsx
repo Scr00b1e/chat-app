@@ -23,23 +23,25 @@ const BottomBar = () => {
 const ChatId = () => {
     return (
         <ChakraProvider>
-            {/* <Sidebar /> */}
-            <Flex h={'100vh'}>
-                <Flex bg={'blue.100'} flex={1} direction='column'>
-                    <TopBar />
-                    <Flex flex={1} direction='column' pt={4} mx={5}>
-                        <Flex bg={'green.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}>
-                            <Text>how ya doin'</Text>
+            <Flex>
+                <Sidebar />
+                <Flex h={'100vh'} width='100%'>
+                    <Flex bg={'blue.100'} flex={1} direction='column'>
+                        <TopBar />
+                        <Flex flex={1} direction='column' pt={4} mx={5}>
+                            <Flex bg={'green.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}>
+                                <Text>how ya doin'</Text>
+                            </Flex>
+                            <Flex bg={'green.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}>
+                                <Text>tell me</Text>
+                            </Flex>
+                            <Flex bg={'gray.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}
+                                alignSelf='end'>
+                                <Text>good bros</Text>
+                            </Flex>
                         </Flex>
-                        <Flex bg={'green.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}>
-                            <Text>tell me</Text>
-                        </Flex>
-                        <Flex bg={'gray.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}
-                            alignSelf='end'>
-                            <Text>good bros</Text>
-                        </Flex>
+                        <BottomBar />
                     </Flex>
-                    <BottomBar />
                 </Flex>
             </Flex>
         </ChakraProvider>
