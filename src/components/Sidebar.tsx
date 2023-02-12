@@ -16,6 +16,8 @@ const Sidebar = () => {
     const [user] = useAuthState(auth);
     const [snapshot, loading, error] = useCollection(collection(db, 'chats'))
     const chats = snapshot?.docs.map((obj) => ({ id: obj.id, ...obj.data() }))
+    console.log(chats);
+
 
     const onSignOut = () => {
         alert('are u sure?')
@@ -24,11 +26,13 @@ const Sidebar = () => {
 
     const Chat = () => {
         return (
-            <Flex p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
-                onClick={() => router.push(`/chat/1`)}>
-                <Avatar marginEnd={3} />
-                <Text>SomeFella@gmail.com</Text>
-            </Flex>
+            chats?.map((obj) => {
+                <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
+                    onClick={() => router.push(`/chat/1`)}>
+                    <Avatar marginEnd={3} />
+                    <Text>{obj.users}</Text>
+                </Flex>
+            })
         )
     }
 
