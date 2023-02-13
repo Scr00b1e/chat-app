@@ -10,14 +10,13 @@ import { auth, db } from 'firebaseconfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { collection } from 'firebase/firestore'
+import { getOtherEmail } from 'utils/getOtherEmail'
 
 const Sidebar = () => {
     const router = useRouter()
     const [user] = useAuthState(auth);
     const [snapshot, loading, error] = useCollection(collection(db, 'chats'))
-    const chats = snapshot?.docs.map((obj) => ({ id: obj.id, ...obj.data() }))
-    console.log(chats);
-
+    const chats = snapshot?.docs.map(obj => ({ id: obj.id, ...obj.data() }))
 
     const onSignOut = () => {
         alert('are u sure?')
@@ -25,23 +24,15 @@ const Sidebar = () => {
     }
 
     const Chat = () => {
-        // return (
-        //     chats?.map((obj) => {
-        //         <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
-        //             onClick={() => router.push(`/chat/1`)}>
-        //             <Avatar marginEnd={3} />
-        //             <Text>{obj.users}</Text>
-        //         </Flex>
-        //     })
-        // )
         return (
-
-            <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
-                onClick={() => router.push(`/chat/1`)}>
-                <Avatar marginEnd={3} />
-                <Text>somefella@gmail.com</Text>
-            </Flex>
-
+            chats?.map(chat => {
+                <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
+                    onClick={() => router.push(`/chat/1`)}>
+                    <Avatar src='' marginEnd={3} />
+                    {/* <Text>{getOtherEmail(chat.users, user)}</Text> */}
+                    <Text>{chat.id}</Text>
+                </Flex>
+            })
         )
     }
 
