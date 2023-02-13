@@ -25,14 +25,23 @@ const Sidebar = () => {
     }
 
     const Chat = () => {
+        // return (
+        //     chats?.map((obj) => {
+        //         <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
+        //             onClick={() => router.push(`/chat/1`)}>
+        //             <Avatar marginEnd={3} />
+        //             <Text>{obj.users}</Text>
+        //         </Flex>
+        //     })
+        // )
         return (
-            chats?.map((obj) => {
-                <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
-                    onClick={() => router.push(`/chat/1`)}>
-                    <Avatar marginEnd={3} />
-                    <Text>{obj.users}</Text>
-                </Flex>
-            })
+
+            <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
+                onClick={() => router.push(`/chat/1`)}>
+                <Avatar marginEnd={3} />
+                <Text>somefella@gmail.com</Text>
+            </Flex>
+
         )
     }
 
