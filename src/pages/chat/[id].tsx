@@ -1,6 +1,10 @@
 import Sidebar from '@/components/Sidebar'
 import { Avatar, Button, ChakraProvider, Flex, FormControl, Heading, Input, Text } from '@chakra-ui/react'
+import { collection, orderBy, query } from 'firebase/firestore'
+import { db } from 'firebaseconfig'
+import { useRouter } from 'next/router'
 import React from 'react'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 const TopBar = () => {
     return (
@@ -21,6 +25,13 @@ const BottomBar = () => {
 }
 
 const ChatId = () => {
+    const router = useRouter()
+    const { id } = router.query
+
+    const q = query(collection(db, `chats/${id}/messages`), orderBy('timestamp'))
+    const [messages] = useCollectionData(q)
+    console.log(messages);
+
     return (
         <ChakraProvider>
             <Flex>
