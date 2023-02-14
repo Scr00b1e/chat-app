@@ -21,6 +21,7 @@ const Sidebar = () => {
     const onSignOut = () => {
         alert('are u sure?')
         signOut(auth)
+        router.push('/')
     }
 
     const chatExits = email => chats?.find(chat => (chat.users.includes(user?.email) && chat.users.includes(email)))
