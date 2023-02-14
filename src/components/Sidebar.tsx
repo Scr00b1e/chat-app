@@ -23,18 +23,11 @@ const Sidebar = () => {
         signOut(auth)
     }
 
-    const Chat = () => {
-        return (
-            chats?.map(chat => {
-                <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
-                    onClick={() => router.push(`/chat/1`)}>
-                    <Avatar src='' marginEnd={3} />
-                    {/* <Text>{getOtherEmail(chat.users, user)}</Text> */}
-                    <Text>{chat.id}</Text>
-                </Flex>
-            })
-        )
-    }
+    // const Chat = () => {
+    //     return (
+
+    //     )
+    // }
 
     return (
         <Flex w={'300px'}
@@ -52,7 +45,17 @@ const Sidebar = () => {
             <Button marginBottom={5}>New Chat</Button>
 
             <Flex overflowY={'scroll'} direction='column' sx={{ scrollbarWidth: "none" }} flex={1}>
-                <Chat />
+                {/* <Chat /> */}
+                {
+                    chats?.map(chat => (
+                        <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
+                            onClick={() => router.push(`/chat/1`)}>
+                            <Avatar src='' marginEnd={3} />
+                            {/* <Text>{getOtherEmail(chat.users, user)}</Text> */}
+                            <Text>{chat.users}</Text>
+                        </Flex>
+                    ))
+                }
             </Flex>
 
         </Flex>
