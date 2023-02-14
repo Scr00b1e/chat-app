@@ -10,7 +10,6 @@ import { auth, db } from 'firebaseconfig'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { collection } from 'firebase/firestore'
-import { getOtherEmail } from 'utils/getOtherEmail'
 
 const Sidebar = () => {
     const router = useRouter()
@@ -23,11 +22,7 @@ const Sidebar = () => {
         signOut(auth)
     }
 
-    // const Chat = () => {
-    //     return (
 
-    //     )
-    // }
 
     return (
         <Flex w={'300px'}
@@ -49,7 +44,7 @@ const Sidebar = () => {
                 {
                     chats?.map(chat => (
                         <Flex key={Math.random()} p={3} _hover={{ bg: 'gray.100' }} cursor='pointer' align={'center'}
-                            onClick={() => router.push(`/chat/1`)}>
+                            onClick={() => router.push(`/chat/${chat.id}`)}>
                             <Avatar src='' marginEnd={3} />
                             {/* <Text>{getOtherEmail(chat.users, user)}</Text> */}
                             <Text>{chat.users}</Text>
