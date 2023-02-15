@@ -40,16 +40,13 @@ const ChatId = () => {
                     <Flex bg={'blue.100'} flex={1} direction='column'>
                         <TopBar />
                         <Flex flex={1} direction='column' pt={4} mx={5}>
-                            <Flex bg={'green.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}>
-                                <Text>how ya doin'</Text>
-                            </Flex>
-                            <Flex bg={'green.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}>
-                                <Text>tell me</Text>
-                            </Flex>
-                            <Flex bg={'gray.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}
-                                alignSelf='end'>
-                                <Text>good bros</Text>
-                            </Flex>
+                            {
+                                messages?.map(msg => (
+                                    <Flex key={Math.random()} bg={'green.200'} w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}>
+                                        <Text>{msg.text}</Text>
+                                    </Flex>
+                                ))
+                            }
                         </Flex>
                         <BottomBar />
                     </Flex>
