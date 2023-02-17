@@ -1,6 +1,6 @@
 import Sidebar from '@/components/Sidebar'
 import { Avatar, Button, ChakraProvider, Flex, FormControl, Heading, Input, Text } from '@chakra-ui/react'
-import { addDoc, collection, doc, orderBy, query, serverTimestamp, Timestamp } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, orderBy, query, serverTimestamp, Timestamp } from 'firebase/firestore'
 import { auth, db } from 'firebaseconfig'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -24,20 +24,26 @@ const ChatId = () => {
     const [user] = useAuthState(auth)
     // const [chat] = useDocumentData(doc(db, "chats", id))
 
+    //GET
     const q = query(collection(db, `chats/${id}/messages`), orderBy('timestamp'))
     const [messages] = useCollectionData(q)
 
+    //POST
     const BottomBar = () => {
         const [input, setInput] = React.useState('')
 
         const sendMsg = async (e: any) => {
             e.preventDefault()
-            await addDoc(collection(db, `chats/${id}/messages`), {
-                text: input,
-                sender: user?.email,
-                timestamp: serverTimestamp()
-            })
-            setInput('')
+            try {
+                await addDoc(collection(db, `chats/${id}/messages`), {
+                    text: input,
+                    sender: user?.email,
+                    timestamp: serverTimestamp()
+                })
+                setInput('')
+            } catch {
+                alert('Something is wrong...')
+            }
         }
 
         return (
@@ -49,18 +55,30 @@ const ChatId = () => {
         )
     }
 
+    //DELETE
+    const onDelete = async () => {
+        try {
+            await deleteDoc(doc(db, `chats/${id}/messages`))
+        } catch {
+            alert('Something is wrong...')
+        }
+    }
+
+    //MESSAGES
     const getMessages = () =>
         messages?.map(msg => {
             const sender = msg.sender === user?.email
             return (
                 <Flex key={Math.random()} bg={sender ? 'green.200' : 'gray.100'} alignSelf={sender ? 'flex-end' : 'flex-start'}
-                    w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1}>
+                    w='fit-content' minWidth={'100px'} borderRadius='lg' p={3} m={1} justifyContent='space-between'>
                     <Text>{msg.text}</Text>
+                    <img src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png" alt="" width='24px' height='26px' style={{ cursor: 'pointer' }} onClick={onDelete} />
                     {/* <Text>{msg.timestamp}</Text> */}
                 </Flex>
             )
         })
 
+    //SCROLL
     React.useEffect(() => {
         setTimeout(
             bottomChat.current?.scrollIntoView({
